@@ -3,9 +3,9 @@ defmodule ChatWeb.TopicLive do
   
   require Logger
   
-  def mount(params, _session, socket) do
+  def mount(params = %{"topic_name" => topic_name}, _session, socket) do
     Logger.info(params: params)
     
-    {:ok, socket}
+    {:ok, assign(socket, topic_name: topic_name)}
   end
 end
