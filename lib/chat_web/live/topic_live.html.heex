@@ -1,1 +1,124 @@
-<strong>I am a TOPIC!</strong>
+<!--
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<!-- Background color split screen for large screens -->
+<div class="fixed top-0 left-0 h-full w-1/2 bg-white" aria-hidden="true"></div>
+<div class="fixed top-0 right-0 h-full w-1/2 bg-gray-50" aria-hidden="true"></div>
+<div class="relative flex min-h-screen flex-col">
+  <!-- Navbar -->
+  <nav class="flex-shrink-0 bg-gray-100">
+    <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
+      <div class="relative flex h-16 items-center justify-between">
+        <!-- Logo section -->
+        <div class="flex items-center px-2 lg:px-0 xl:w-64">
+          <div class="flex-shrink-0">
+            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=gray&shade=600" alt="Your Company">
+          </div>
+        </div>
+
+        <!-- Search section -->
+        <div class="flex flex-1 justify-center lg:justify-end">
+          <div class="w-full px-2 lg:px-6">
+            <p class="text-xl text-gray-600 font-bold px-4">Learn Phoenix 1.7 and Live View at: ProductiveProgrammer.com</p>
+          </div>
+        </div>
+        <!-- Links section -->
+        <div class="lg:w-80">
+          <div class="flex items-center justify-end">
+            <div class="flex">
+              <.link patch={~p"/"} class="ml-6 inline-flex items-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Change Topic</.link>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 3 column wrapper -->
+  <div class="mx-auto w-full max-w-7xl flex-grow lg:flex xl:px-8">
+    <!-- Left sidebar & main wrapper -->
+    <div class="min-w-0 flex-1 bg-white xl:flex">
+      <div class="border-b border-gray-200 bg-white xl:w-64 xl:flex-shrink-0 xl:border-b-0 xl:border-r xl:border-gray-200">
+        <div class="h-full py-6 pl-4 pr-6 sm:pl-6 lg:pl-8 xl:pl-0">
+          <!-- Start left column area -->
+          <div class="relative h-full" style="min-height: 12rem">
+            <!-- Start User List -->
+                <div id="user-list">
+                    <p class="pb-4 mb-2">Logged in as: <span class="font-bold">sjm</span></p>
+
+                    <h3 class="font-bold pb-4 mb-4 border-b">Users online</h3>
+                    <p class="py-1 font-medium">User 1</p>
+                    <p class="py-1 font-medium">User 2</p>
+                    <p class="py-1 font-medium">Etc</p>
+                </div>
+                <!-- End User List -->
+          </div>
+          <!-- End left column area -->
+        </div>
+      </div>
+
+      <div class="bg-white lg:min-w-0 lg:flex-1">
+        <div class="h-full py-6 px-4 sm:px-6 lg:px-8">
+          <!-- Start main area-->
+          <div class="relative h-full" style="min-height: 36rem">
+            <!-- start our messages -->
+                <ul role="list" class="divide-y divide-gray-200 max-h-screen h-3/5 overflow-auto">
+                <li class="relative bg-white py-5 px-4 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 hover:bg-gray-50">
+                    <div class="flex justify-between space-x-3">
+                    <div class="min-w-0 flex-1">
+                        <a href="#" class="block focus:outline-none">
+                        <span class="absolute inset-0" aria-hidden="true"></span>
+                        <p class="truncate text-sm font-medium text-gray-900 mb-4">Gloria Roberston</p>
+                        </a>
+                    </div>
+                    </div>
+                    <div class="mt-1">
+                    <p class="text-sm text-gray-600 line-clamp-2">Doloremque dolorem maiores assumenda dolorem facilis. Velit vel in a rerum natus facere. Enim rerum eaque qui facilis. Numquam laudantium sed id dolores omnis in. Eos reiciendis deserunt maiores et accusamus quod dolor.</p>
+                    </div>
+                </li>
+                <!-- More messages... -->
+                </ul>
+            <!-- end of our messages -->
+            <.form
+              :let={f}
+              for={:chat}
+              id="chat-form"
+              >
+              <.input field={{f, :message}} placeholder="Sup?!" />
+            </.form>
+          </div>
+          <!-- End main area -->
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-50 pr-4 sm:pr-6 lg:flex-shrink-0 lg:border-l lg:border-gray-200 lg:pr-8 xl:pr-0">
+      <div class="h-full py-6 pl-6 lg:w-80">
+        <!-- Start right column area -->
+        <div class="relative h-full" style="min-height: 16rem">
+          <!-- Start whatever you want here -->
+            <h1 class="mb-4 pb-4 border-b">Currently Topic: </h1>
+            <p class="">Built by <strong>ProductiveProgrammer.com</strong></p>
+            <p><strong>Using: </strong></p>
+            <img src="/images/phoenix.png" alt="pp" class="mx-auto"/>
+            <p><strong>Learn Phoenix & Elixir at: </strong></p>
+            <p class="text-xl">ProductiveProgrammer.com</p>
+          <!-- End whatever you want here -->
+        </div>
+        <!-- End right column area -->
+      </div>
+    </div>
+  </div>
+</div>
