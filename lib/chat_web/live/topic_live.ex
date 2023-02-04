@@ -31,4 +31,24 @@ defmodule ChatWeb.TopicLive do
     Logger.info(message_data: message_data)
     {:noreply, socket}
   end
+
+  def user_msg_heex(assigns) do
+    ~H"""
+    <li class="relative bg-white py-5 px-4 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 hover:bg-gray-50">
+      <div class="flex justify-between space-x-3">
+        <div class="min-w-0 flex-1">
+          <a href="#" class="block focus:outline-none">
+            <span class="absolute inset-0" aria-hidden="true"></span>
+            <p class="truncate text-sm font-medium text-gray-900 mb-4">Gloria Roberston</p>
+          </a>
+        </div>
+      </div>
+      <div class="mt-1">
+        <p class="text-sm text-gray-600 line-clamp-2">
+          Doloremque dolorem maiores assumenda dolorem facilis. Velit vel in a rerum natus facere. Enim rerum eaque qui facilis. Numquam laudantium sed id dolores omnis in. Eos reiciendis deserunt maiores et accusamus quod dolor.
+        </p>
+      </div>
+    </li>
+    """
+  end
 end
