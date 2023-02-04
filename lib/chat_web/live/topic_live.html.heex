@@ -95,8 +95,10 @@
               :let={f}
               for={:chat}
               id="chat-form"
+              phx-change="message_change"
+              phx-submit="submit_message"
               >
-              <.input field={{f, :message}} placeholder="Sup?!" />
+              <.input field={{f, :message}} value={@message} placeholder="Sup?!" />
             </.form>
           </div>
           <!-- End main area -->
