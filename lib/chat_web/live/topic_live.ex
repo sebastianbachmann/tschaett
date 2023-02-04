@@ -12,7 +12,8 @@ defmodule ChatWeb.TopicLive do
 
     username = AnonymousNameGenerator.generate_random()
 
-    {:ok, assign(socket, topic_name: topic_name, username: username, message: "")}
+    {:ok,
+     assign(socket, topic_name: topic_name, username: username, message: "", chat_messages: [])}
   end
 
   def handle_event("submit_message", %{"chat" => %{"message" => message}}, socket) do
@@ -29,7 +30,9 @@ defmodule ChatWeb.TopicLive do
 
   def handle_info(%{event: "new_message", payload: message_data}, socket) do
     Logger.info(message_data: message_data)
-    {:noreply, socket}
+    Logger.info(chat_messages: socket.assigns.chat_messages)
+
+    {:noreply, assign(socket, chat_messages: socket.assigns.chat_messages ++ [message_data])}
   end
 
   def user_msg_heex(assigns) do
@@ -45,7 +48,7 @@ defmodule ChatWeb.TopicLive do
       </div>
       <div class="mt-1">
         <p class="text-sm text-gray-600 line-clamp-2">
-          Doloremque dolorem maiores assumenda dolorem facilis. Velit vel in a rerum natus facere. Enim rerum eaque qui facilis. Numquam laudantium sed id dolores omnis in. Eos reiciendis deserunt maiores et accusamus quod dolor.
+          <%= @msg %>
         </p>
       </div>
     </li>
