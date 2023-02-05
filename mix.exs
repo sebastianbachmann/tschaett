@@ -48,7 +48,8 @@ defmodule Chat.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:anonymous_name_generator, "~> 0.1.3"}
+      {:anonymous_name_generator, "~> 0.1.3"},
+      {:uuid, "~> 1.1"}
     ]
   end
 

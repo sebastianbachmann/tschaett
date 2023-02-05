@@ -26,7 +26,7 @@ defmodule ChatWeb.TopicLive do
     message_data = %{
       msg: message,
       username: socket.assigns.username,
-      uuid: AnonymousNameGenerator.generate_random()
+      uuid: UUID.uuid1()
     }
 
     ChatWeb.Endpoint.broadcast(socket.assigns.topic_name, "new_message", message_data)
