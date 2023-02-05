@@ -62,7 +62,7 @@
             <!-- start our messages -->
                 <ul role="list" class="divide-y divide-gray-200 max-h-screen h-3/5 overflow-auto">
                   <%= for message_data <- @chat_messages do %>
-                    <.user_msg_heex msg={message_data} />
+                    <.user_msg_heex msg_data={message_data} />
                 <%= end %>
                 </ul>
             <!-- end of our messages -->

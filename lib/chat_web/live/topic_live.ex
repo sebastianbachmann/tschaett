@@ -18,8 +18,9 @@ defmodule ChatWeb.TopicLive do
 
   def handle_event("submit_message", %{"chat" => %{"message" => message}}, socket) do
     Logger.info(submit_message: message)
+    message_data = %{msg: message, username: socket.assigns.username}
 
-    ChatWeb.Endpoint.broadcast(socket.assigns.topic_name, "new_message", message)
+    ChatWeb.Endpoint.broadcast(socket.assigns.topic_name, "new_message", message_data)
 
     {:noreply, assign(socket, message: "")}
   end
@@ -35,21 +36,21 @@ defmodule ChatWeb.TopicLive do
     {:noreply, assign(socket, chat_messages: socket.assigns.chat_messages ++ [message_data])}
   end
 
-  def user_msg_heex(assigns) do
+  def user_msg_heex(assigns = %{msg_data: %{msg: msg, username: username}}) do
+    Logger.info(msg: msg, username: username)
+
     ~H"""
     <li class="relative bg-white py-5 px-4 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 hover:bg-gray-50">
       <div class="flex justify-between space-x-3">
         <div class="min-w-0 flex-1">
           <a href="#" class="block focus:outline-none">
             <span class="absolute inset-0" aria-hidden="true"></span>
-            <p class="truncate text-sm font-medium text-gray-900 mb-4">Gloria Roberston</p>
+            <p class="truncate text-sm font-medium text-gray-900 mb-4"><%= username %></p>
           </a>
         </div>
       </div>
       <div class="mt-1">
-        <p class="text-sm text-gray-600 line-clamp-2">
-          <%= @msg %>
-        </p>
+        <p class="text-sm text-gray-600 line-clamp-2"><%= msg %></p>
       </div>
     </li>
     """
