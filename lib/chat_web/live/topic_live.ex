@@ -53,11 +53,11 @@ defmodule ChatWeb.TopicLive do
     {:noreply, assign(socket, users_online: users_online)}
   end
 
-  def user_msg_heex(assigns = %{msg_data: %{msg: msg, username: username, uuid: uuid}}) do
+  def user_msg_heex(assigns = %{msg_data: %{msg: msg, username: username, uuid: uuid}, me: me}) do
     ~H"""
     <li
       id={uuid}
-      class="relative bg-white py-5 px-4 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 hover:bg-gray-50"
+      class={"relative #{if username == me, do: "bg-white ml-40", else: "bg-green-300 mr-40" } mb-2 py-5 px-4 border rounded-xl"}
     >
       <div class="flex justify-between space-x-3">
         <div class="min-w-0 flex-1">

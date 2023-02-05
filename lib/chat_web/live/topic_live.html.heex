@@ -60,10 +60,11 @@
         <div class="h-full py-6 px-4 sm:px-6 lg:px-8">
           <!-- Start main area-->
           <div class="relative h-full" style="min-height: 36rem">
+            <p class="mb-4 lg:block xl:hidden">Chat Messages</p>
             <!-- start our messages -->
                 <ul id="chat_messages" role="list" class="divide-y divide-gray-200 max-h-screen h-3/5 overflow-auto" phx-update="append">
                   <%= for message_data <- @chat_messages do %>
-                    <.user_msg_heex msg_data={message_data} />
+                    <.user_msg_heex msg_data={message_data} me={@username} />
                 <%= end %>
                 </ul>
             <!-- end of our messages -->
