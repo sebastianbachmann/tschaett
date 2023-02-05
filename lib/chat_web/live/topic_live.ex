@@ -7,6 +7,7 @@ defmodule ChatWeb.TopicLive do
     Logger.info(params: params)
 
     username = AnonymousNameGenerator.generate_random()
+    [username | _] = String.split(username, "-")
 
     if connected?(socket) do
       ChatWeb.Endpoint.subscribe(topic_name)
