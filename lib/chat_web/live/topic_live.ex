@@ -6,15 +6,17 @@ defmodule ChatWeb.TopicLive do
   def mount(params = %{"topic_name" => topic_name}, _session, socket) do
     Logger.info(params: params)
 
+    username = AnonymousNameGenerator.generate_random()
+
     if connected?(socket) do
       ChatWeb.Endpoint.subscribe(topic_name)
+      ChatWeb.Presence.track(self(), topic_name, username, %{})
     end
-
-    username = AnonymousNameGenerator.generate_random()
 
     {:ok,
      assign(socket,
        topic_name: topic_name,
+       users_online: [],
        username: username,
        message: "",
        chat_messages: [],
@@ -42,6 +44,13 @@ defmodule ChatWeb.TopicLive do
     Logger.info(chat_messages: socket.assigns.chat_messages)
 
     {:noreply, assign(socket, chat_messages: [message_data])}
+  end
+
+  def handle_info(%{event: "presence_diff"}, socket) do
+    users_online = ChatWeb.Presence.list(socket.assigns.topic_name) |> Map.keys()
+
+    Logger.info(presence_diff: users_online)
+    {:noreply, assign(socket, users_online: users_online)}
   end
 
   def user_msg_heex(assigns = %{msg_data: %{msg: msg, username: username, uuid: uuid}}) do

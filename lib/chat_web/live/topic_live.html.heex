@@ -45,9 +45,10 @@
                     <p class="pb-4 mb-2">Logged in as: <span class="font-bold"><%= @username %></span></p>
 
                     <h3 class="font-bold pb-4 mb-4 border-b">Users online</h3>
-                    <p class="py-1 font-medium">User 1</p>
-                    <p class="py-1 font-medium">User 2</p>
-                    <p class="py-1 font-medium">Etc</p>
+                    <%= for user <- @users_online do %>
+                      <p class="py-1 font-medium"><%= user %></p>
+                    <%= end %>
+                    
                 </div>
                 <!-- End User List -->
           </div>
