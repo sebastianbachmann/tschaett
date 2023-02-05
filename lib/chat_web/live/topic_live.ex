@@ -13,12 +13,21 @@ defmodule ChatWeb.TopicLive do
     username = AnonymousNameGenerator.generate_random()
 
     {:ok,
-     assign(socket, topic_name: topic_name, username: username, message: "", chat_messages: [])}
+     assign(socket,
+       topic_name: topic_name,
+       username: username,
+       message: "",
+       chat_messages: [],
+       temporary_assigns: [chat_messages: []]
+     )}
   end
 
   def handle_event("submit_message", %{"chat" => %{"message" => message}}, socket) do
-    Logger.info(submit_message: message)
-    message_data = %{msg: message, username: socket.assigns.username}
+    message_data = %{
+      msg: message,
+      username: socket.assigns.username,
+      uuid: AnonymousNameGenerator.generate_random()
+    }
 
     ChatWeb.Endpoint.broadcast(socket.assigns.topic_name, "new_message", message_data)
 
@@ -30,17 +39,17 @@ defmodule ChatWeb.TopicLive do
   end
 
   def handle_info(%{event: "new_message", payload: message_data}, socket) do
-    Logger.info(message_data: message_data)
     Logger.info(chat_messages: socket.assigns.chat_messages)
 
-    {:noreply, assign(socket, chat_messages: socket.assigns.chat_messages ++ [message_data])}
+    {:noreply, assign(socket, chat_messages: [message_data])}
   end
 
-  def user_msg_heex(assigns = %{msg_data: %{msg: msg, username: username}}) do
-    Logger.info(msg: msg, username: username)
-
+  def user_msg_heex(assigns = %{msg_data: %{msg: msg, username: username, uuid: uuid}}) do
     ~H"""
-    <li class="relative bg-white py-5 px-4 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 hover:bg-gray-50">
+    <li
+      id={uuid}
+      class="relative bg-white py-5 px-4 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 hover:bg-gray-50"
+    >
       <div class="flex justify-between space-x-3">
         <div class="min-w-0 flex-1">
           <a href="#" class="block focus:outline-none">

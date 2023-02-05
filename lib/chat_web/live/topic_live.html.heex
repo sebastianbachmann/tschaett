@@ -60,7 +60,7 @@
           <!-- Start main area-->
           <div class="relative h-full" style="min-height: 36rem">
             <!-- start our messages -->
-                <ul role="list" class="divide-y divide-gray-200 max-h-screen h-3/5 overflow-auto">
+                <ul id="chat_messages" role="list" class="divide-y divide-gray-200 max-h-screen h-3/5 overflow-auto" phx-update="append">
                   <%= for message_data <- @chat_messages do %>
                     <.user_msg_heex msg_data={message_data} />
                 <%= end %>
